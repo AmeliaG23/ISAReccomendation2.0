@@ -1,0 +1,151 @@
+<!-- 
+File : factFind.html
+Author : Amelia Goldsby
+Date Created : 27/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file is the beginning of the Recommendation journey. Users will answer questions 
+              regarding affordability, and answers will be saved to the database table Projections
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends base.html where header and footer is set and main.css is used -->
+{% extends "base.html" %}
+
+<!-- Title of page -->
+{% block title %}Fact Find Evaluation{% endblock %}
+
+{% block content %}
+<script>
+    // Javascript function to validate form entries to be between specific values
+    function validateForm(event) {
+        // Retrieves inputs from form
+        let deposit = parseFloat(document.querySelector('input[name="deposit"]').value);
+        let monthlyPayment = parseFloat(document.querySelector('input[name="monthlyPayment"]').value);
+        let years = parseInt(document.querySelector('input[name="years"]').value);
+        let savings = document.querySelector('input[name="savings"]:checked').value === "true";
+        let highDebt = document.querySelector('input[name="highDebt"]:checked').value === "true";
+        let changes = document.querySelector('input[name="changes"]:checked').value === "true";
+
+        // Validate inputs to ensure they are numbers
+        if (isNaN(deposit) || isNaN(monthlyPayment) || isNaN(years)) {
+            alert("Please enter valid numbers for deposit, monthly payment, and years.");
+            return false;
+        }
+        // Validate deposit, monthly payment, and years
+        if (deposit <= 30) {
+            alert("Deposit must be greater than 30.");
+            return false;
+        }
+        if (monthlyPayment <= 25) {
+            alert("Monthly Payment must be greater than 25.");
+            return false;
+        }
+        if (years >= 40) {
+            alert("Number of years must be less than 40.");
+            return false;
+        }
+        // Validate radio button selections
+        if (!savings) {
+            alert("You must have enough savings left over after investing.");
+            return false;
+        }
+        if (highDebt) {
+            alert("You must not have high debt to apply for an ISA.");
+            return false;
+        }
+        if (changes) {
+            alert("You must not be expecting major financial changes.");
+            return false;
+        }
+        // Checks all radio buttons are checked
+        let radios = document.querySelectorAll('input[type="radio"]');
+        for (let radio of radios) {
+            let name = radio.name;
+            if (document.querySelectorAll(`input[name="${name}"]:checked`).length === 0) {
+                alert("Please answer all the questions.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
+
+<!-- Contains main body content -->
+<div class="content">
+    <h1>Fact Find Evaluation</h1>
+    <p>Please fill out the following affordability evaluation form to see if you are eligible for an ISA.</p>
+
+    <div class="form">
+        <form method="POST" action="{{ url_for('factFind') }}" onsubmit="return validateForm(event)">
+            <!-- Affordability evaluation questions -->
+            <label>Deposit:</label><br>
+            <input type="number" name="deposit" placeholder="Deposit" value="{{ prefilledData.deposit }}"
+                required /><br>
+
+            <label>Monthly Payment:</label><br>
+            <input type="number" name="monthlyPayment" placeholder="Monthly Payment"
+                value="{{ prefilledData.monthlyPayment }}" required /><br>
+
+            <label>Number of years you want to invest for:</label><br>
+            <input type="number" name="years" placeholder="Years" value="{{ prefilledData.years }}" required /><br>
+
+            <!-- Radio buttons with pre-filled data support -->
+            <label>Will you have enough savings after investing?</label><br>
+            <input type="radio" name="savings" value="true" required {% if prefilledData.savings=='true' %}checked{%
+                endif %} /> Yes<br>
+            <input type="radio" name="savings" value="false" {% if prefilledData.savings=='false' %}checked{% endif
+                %} /> No<br>
+
+            <label>Do you have high debt?</label><br>
+            <input type="radio" name="highDebt" value="true" {% if prefilledData.highDebt=='true' %}checked{% endif
+                %} /> Yes<br>
+            <input type="radio" name="highDebt" value="false" required {% if prefilledData.highDebt=='false' %}checked{%
+                endif %} /> No<br>
+
+            <label>Are you expecting any changes?</label><br>
+            <input type="radio" name="changes" value="true" {% if prefilledData.changes=='true' %}checked{% endif %} />
+            Yes<br>
+            <input type="radio" name="changes" value="false" required {% if prefilledData.changes=='false' %}checked{%
+                endif %} /> No<br>
+
+            <!-- Attitude to risk questions -->
+            <h2>Attitude to Risk</h2>
+            <label>How would you describe your willingness to take risks?</label><br>
+            <input type="radio" name="riskTolerance" value="high" required {% if prefilledData.riskTolerance=='high'
+                %}checked{% endif %} /> High<br>
+            <input type="radio" name="riskTolerance" value="medium" {% if prefilledData.riskTolerance=='medium'
+                %}checked{% endif %} /> Medium<br>
+            <input type="radio" name="riskTolerance" value="low" {% if prefilledData.riskTolerance=='low' %}checked{%
+                endif %} /> Low<br>
+
+            <label>How comfortable are you with investments?</label><br>
+            <input type="radio" name="investmentComfort" value="veryComfortable" required {% if
+                prefilledData.investmentComfort=='veryComfortable' %}checked{% endif %} /> Very Comfortable<br>
+            <input type="radio" name="investmentComfort" value="somewhatComfortable" {% if
+                prefilledData.investmentComfort=='somewhatComfortable' %}checked{% endif %} /> Somewhat Comfortable<br>
+            <input type="radio" name="investmentComfort" value="notComfortable" {% if
+                prefilledData.investmentComfort=='notComfortable' %}checked{% endif %} /> Not Comfortable<br>
+
+            <label>How frequently do you review your investments?</label><br>
+            <input type="radio" name="investmentReview" value="regularly" required {% if
+                prefilledData.investmentReview=='regularly' %}checked{% endif %} /> Regularly<br>
+            <input type="radio" name="investmentReview" value="occasionally" {% if
+                prefilledData.investmentReview=='occasionally' %}checked{% endif %} /> Occasionally<br>
+            <input type="radio" name="investmentReview" value="rarely" {% if prefilledData.investmentReview=='rarely'
+                %}checked{% endif %} /> Rarely<br>
+
+            <br>
+            <button type="submit" class="button">Submit</button><br>
+            <!-- Button will redirect user to last screen -->
+            <button class="back-button" onclick="window.history.back()">Back</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

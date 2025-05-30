@@ -1,0 +1,69 @@
+<!-- 
+File : userAccount.html
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the user account page, accessed through the header, top right. The user 
+              here can access their account details, and can read and update their account details. 
+              This page extends base.html where the header and footer is created and styled by main.css. 
+
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends base.html where header and footer is set and main.css is used-->
+{% extends "base.html" %}
+<!-- Page titles -->
+{% block title %}User Account{% endblock %}
+{% block header %}User Account{% endblock %}
+
+{% block content %}
+
+<script>
+
+    // JavaScript function to navigate based on the provided redirect URL
+    function backButton() {
+        // Get the value of the redirect URL from the hidden input
+        const redirectUrl = document.getElementById("redirect-url").value;
+        window.location.href = redirectUrl;
+    }
+</script>
+
+<div class="content">
+    <!-- Body content- similar to update.html -->
+    <h2>Update Account Details</h2>
+    <!-- Display flash messages if passed through -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <!-- Form to allow user to update their own details -->
+    <form method="POST" action="{{ url_for('userAccount', id=user.id) }}">
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" value="{{ user.username }}" minlength="5" maxlength="15" />
+        <br /><br />
+        <label for="password">New Password:</label><br />
+        <input type="password" id="password" name="password" placeholder="Leave blank to keep current password"
+            minlength="6" maxlength="14" />
+        <br /><br />
+        <!-- Update button to update current users details in User table -->
+        <button class="button" type="submit">Update Account</button>
+        <!-- Back button -->
+        <button class="back-button" type="button" onclick="backButton()">Back</button>
+        <input type="hidden" id="redirect-url"
+            value="{{ url_for('admin') if previousPage == 'admin' else url_for('home') }}">
+
+    </form>
+</div>
+{% endblock %}
+
+<!--(Jakerieger, 2022)-->

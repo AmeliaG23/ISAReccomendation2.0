@@ -1,0 +1,64 @@
+<!-- 
+File : update.html
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the update page, accessed through the user_account and admin pages, 
+              bottom left on the home page. The user here can update user details. This page extends 
+              base.html where the header and footer is created and styled by main.css. 
+
+(Germain, 2023)
+-->
+
+
+<!-- Jinja -->
+<!-- Extends base.html where header and footer is set and main.css is used -->
+{% extends "base.html" %}
+<!-- Page titles -->
+{% block title %}Update User{% endblock %}
+{% block header %}Update User{% endblock %}
+
+{% block content %}
+<script>
+    // Javascript function for back button- allows user to redirect to admin.hmtl
+    function backButton() {
+        window.location.href = "{{ url_for('admin') }}";
+    }
+</script>
+
+<div class="content">
+    <!-- Main body content -->
+    <h2>Update User Details</h2>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <!-- Form to allow admin user to update user details -->
+    <form method="POST" action="{{ url_for('update', id=user.id) }}">
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" value="{{ user.username }}" minlength="5" maxlength="15" />
+        <br /><br />
+        <label for="password">New Password:</label><br />
+        <input type="password" id="password" name="password" placeholder="Leave blank to keep current password"
+            minlength="6" maxlength="14" />
+        <br /><br />
+        <!-- Submit button updates user details -->
+        <button class="button" type="submit">Update User</button>
+        <!-- Back button allows user to navigate back to admin.html -->
+        <button class="back-button" type="button" onclick="backButton()">Back</button>
+    </form>
+</div>
+{% endblock %}
+
+<!--(Jakerieger, 2022)-->

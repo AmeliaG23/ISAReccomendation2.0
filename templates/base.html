@@ -1,0 +1,85 @@
+<!-- 
+File : base.html
+Author : Amelia Goldsby
+Date Created : 23/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the main layout for all pages after log in. Pages will use inheritence 
+              to use the styles laid out here- like the header and footer. 
+(Germain, 2023)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}User Account{% endblock %}</title>
+    <!-- Links to the main.css style sheet which most pages will inherit -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Javascript code to control functions -->
+    <script>
+        // Log Out function- creates an alert to confirm if user wants to log out
+        function confirmLogout() {
+            if (confirm("Are you sure you want to log out?")) {
+                // If selected okay, redirect to log in page
+                window.location.href = "{{ url_for('logout') }}";
+            }
+        }
+        // Admin Control function- only visible to admin users
+        function adminControl() {
+            window.location.href = "{{ url_for('admin') }}";
+        }
+        // Profile Button function- takes user to their account page
+        function profileButton() {
+            window.location.href = "{{ url_for('userAccount') }}";
+        }
+    </script>
+</head>
+
+<!-- Styles header and footer for main pages -->
+
+<body>
+    <header class="header">
+        <!-- Styles header title, redirects user to home page -->
+        <div class="header-title">
+            <a href="{{ url_for('home') }}" class="title-link">
+                <h1>ISA Recommendation Journey</h1>
+            </a>
+        </div>
+        <!-- Styles profile icon button- utilises icon -->
+        <div class="header-profile">
+            <button class="profile-button" onclick="profileButton()">
+                <img src="{{ url_for('static', filename='images/profileIcon.png') }}" alt="Profile Icon">
+                <!-- (FlatIcon, 2024) -->
+            </button>
+        </div>
+    </header>
+    <!-- Layout for content using Jinja, used by pages inheriting this layout -->
+    <main class="content-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- Styles footer -->
+    <footer class="site-footer">
+        {% if admin %} <!-- If user is an admin -->
+        <div class="admin-control">
+            <button class="button" onclick="adminControl()">
+                <img src="{{ url_for('static', filename='images/admin.png') }}" alt="Admin Control Button"
+                    class="header-icon" style="width: 20px; vertical-align: middle;"> <!-- (FlatIcon, 2024) -->
+                Admin Control
+            </button>
+        </div>
+        {% endif %}
+        <!-- Log out button- accessible to all user -->
+        <button onclick="confirmLogout()" class="button">Log Out</button>
+    </footer>
+</body>
+
+</html>

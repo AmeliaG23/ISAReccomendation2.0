@@ -1,0 +1,35 @@
+<!-- 
+File : index.html
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the form for the login page, 
+              which extends the base template.
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends loginBase.html where main body and layout is set, styling is inherited from login.css-->
+{% extends "loginBase.html" %}
+<!-- Page title -->
+{% block title %}Log In{% endblock %}
+{% block header %}Log In{% endblock %}
+{% block content %}
+<!-- Form- allows user to log in -->
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required /><br />
+    <input type="password" name="password" placeholder="Password" required /><br />
+    <input type="submit" value="Login" class="button" />
+</form>
+<!-- Link to allow users to navigate to sign up page -->
+<p>
+    Don't have an account? <a href="{{ url_for('signUp') }}">Sign Up</a>
+</p>
+{% endblock %}
+
+<!--(Jakerieger, 2022)-->

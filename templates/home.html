@@ -1,0 +1,45 @@
+<!-- 
+File : home.html
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains home page, accessed once users have logged in. The user here 
+              accesses the three separate journeys into receiving their personalized ISA Recommendation
+              and projection. This page extends base.html where the header and footer are created and
+              styled by main.css. 
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends base.html where header and footer is set and main.css is used-->
+{% extends "base.html" %}
+<!-- Title of page -->
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Content in main body of page -->
+<div class="content">
+    <h1>Welcome to your ISA Recommendation Journey</h1>
+    <p1>To start your ISA Recommendation Journey please begin with a quick and simple affordability evaluation.</p1>
+    <br>
+    <br>
+    <p2>When complete you will be asked to complete your Attitude to Risk Evaluation. Your Projection button
+        will appear on this home page when both evalutions are complete. </p2>
+    <!-- Journery blocks which allow users to access fact find evaluation and past projection-->
+    <div class="journey-blocks">
+        <a href="{{ url_for('factFind') }}" class="journey-block">
+            <h2>Fact Find</h2>
+            <p>Start your ISA journey by providing your financial details.</p>
+        </a>
+        <a href="{{ url_for('recommendations') }}" class="journey-block">
+            <h2>View Your Past Projection</h2>
+            <p>Have you already complete the Fact Find Evaluation? View your past projection predictions.</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

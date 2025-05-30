@@ -1,0 +1,232 @@
+/* 
+File : main.css
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA 
+
+Description : This file contains the main styling for all pages when users are logged in. 
+              The base.html inherits these styles. 
+*/
+
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #afc4e7;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #002663;
+}
+
+.header-title {
+  color: #ffffff;
+  margin: 0;
+  font-size: 24px;
+}
+
+.header-title:hover {
+  background-color: #000f26;
+  opacity: 50%;
+}
+
+/* Button Styles */
+.button,
+.profile-button {
+  background-color: #ffcc00;
+  color: #002663;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.profile-button {
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 50px;
+}
+
+.button:hover,
+.profile-button:hover {
+  background-color: #e6b800;
+}
+
+.back-button {
+  background-color: #e2481e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background-color: #932b0e;
+}
+
+/* Content Styles */
+.content-container {
+  padding: 50px;
+  text-align: center;
+}
+
+.content {
+  margin: 0 auto;
+  width: 600px;
+  background-color: #fff;
+  color: #002663;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.projection-content {
+  text-align: left;
+}
+
+/* Form Styles */
+.form {
+  text-align: left;
+  color: #002663;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Table Styles */
+.table,
+td,
+th {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  height: 30px;
+}
+
+/* Footer Styles */
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+}
+
+/* Admin Control Styles */
+.admin-control {
+  margin-bottom: 10px;
+}
+
+.admin-control label {
+  display: block;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+}
+
+/* Link Styles */
+.title-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.title-link h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Journey Block Styles */
+.journey-blocks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.journey-block {
+  background-color: #002663;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.journey-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.journey-block h2 {
+  margin-bottom: 15px;
+}
+
+.journey-block p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Flash Messages Styling */
+.flash-messages {
+  margin: 20px 0;
+}
+
+.flash-messages p {
+  padding: 15px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  margin: 0;
+}
+
+.flash-messages .success {
+  background-color: #4caf50;
+}
+
+.flash-messages .danger {
+  background-color: #f44336;
+}
+
+.flash-messages .warning {
+  background-color: #ff9800;
+}

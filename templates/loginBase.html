@@ -1,0 +1,40 @@
+<!-- 
+File : loginBase.html
+Author : Amelia Goldsby
+Date Created : 23/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This is the base template for the login and signup pages. 
+              It contains the shared structure and styling, which the 
+              login and signup pages will extend.
+(Germain, 2023)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Login{% endblock %}</title>
+    <!-- Link to login.css style sheet which login.html and signUp.html will inherit -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+</head>
+
+<body>
+    <!-- Sets out layout on pages which will style main content -->
+    <div class="container">
+        <h2>{% block header %}{% endblock %}</h2>
+        {% if error %}
+        <!-- If there is an error message -->
+        <p style="color: red">{{ error }}</p>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

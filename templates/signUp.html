@@ -1,0 +1,58 @@
+<!-- 
+File : signup.html
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the form for the signup page, which extends the base template.
+
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends loginBase.html where main body and layout is set, styling is inherited from login.css-->
+{% extends "loginBase.html" %}
+<!-- Page titles -->
+{% block title %}Sign Up{% endblock %}
+{% block header %}Sign Up{% endblock %}
+
+{% block content %}
+<!-- Display flash messages if the validation from app route does not pass -->
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    {% if category == 'warning' %}
+    <!-- Styles flash warning to be yellow if warning message is passed through -->
+    <div class="flash warning">{{ message }}</div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<!-- Validation of form takes place in app route -->
+<form method="POST" action="{{ url_for('signUp') }}" onsubmit="return validateForm()">
+    <!-- All input boxes are required -->
+    <input type="text" id="username" name="username" placeholder="Username" required minlength="5" maxlength="15">
+    <input type="password" id="password" name="password" placeholder="Password" required minlength="6" maxlength="14">
+    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required
+        minlength="6" maxlength="14">
+
+    <button class="button" type="submit">Sign Up</button>
+</form>
+<!-- Link to login.html if user already has an account -->
+<p>Already have an account? <a href="{{ url_for('index') }}">Login</a></p>
+
+{% if request.args.get('success') %}
+<!-- Success alert will only display if the account is created, and validated correctly -->
+<script>
+    alert("Account Created Successfully, please log in.");
+    // When user presses okay, user is redirected to login.html
+    window.location.href = "{{ url_for('index') }}";
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,82 @@
+<!-- 
+File : recommendations.html
+Author : Amelia Goldsby
+Date Created : 28/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA    & 
+         Software Engineering and DevOps, 
+         Level 6, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the layout for the page in which users are able to view past 
+              projections, if they have one. It will update every time a new projection is forecasted— 
+              only displaying the most recent one to avoid confusion. Users are also only able to view their own 
+              projection due to the GDPR law (Gov.uk, 2024).
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends base.html where header and footer is set and main.css is used-->
+{% extends "base.html" %}
+
+<!-- Page title -->
+{% block title %}Past Projections{% endblock %}
+
+{% block content %}
+
+<script>
+    // JavaScript function for back button - redirects user to home.html
+    function backButton() {
+        window.location.href = "{{ url_for('home') }}";
+    }
+
+    // JavaScript function for Update Projections button
+    function updateButton() {
+        if (confirm("Are you sure you want to update your projections?\n\nIf you do, you will be required to complete the Attitude to Risk questions again to ensure accuracy. ")) {
+            // If selected okay, redirect to log in page
+            window.location.href = "{{ url_for('factFind') }}";
+        }
+    }
+</script>
+
+<div class="content">
+    <h1>Past Projections</h1>
+    <p>If you have completed the Fact Find Questions before, your past projections will be visible below!</p>
+
+    {% if projectionsData and projectionsData|length > 0 %}
+    <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>Deposit</th>
+                <th>Monthly Payment</th>
+                <th>Years</th>
+                <th>Normal Projection Amount</th>
+                <th>Risk Rating</th>
+                <th>Projection Risk Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for projection in projectionsData %}
+            <tr>
+                <td>{{ projection.deposit }}</td>
+                <td>{{ projection.monthlyPayment }}</td>
+                <td>{{ projection.years }}</td>
+                <td>{{ projection.projectionAmount}}
+                </td>
+                <td>{{ projection.riskRating }}</td>
+                <td>{{ projection.projectionRiskAmount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button class="button" type="button" onclick="updateButton()">Update Projections</button>
+    {% else %}
+    <p>You have no past projections, complete the fact find questionnaire first.</p>
+    {% endif %}
+
+    <!-- Buttons for navigation -->
+    <button class="back-button" type="button" onclick="backButton()">Back</button>
+</div>
+{% endblock %}

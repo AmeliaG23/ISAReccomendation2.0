@@ -1,0 +1,119 @@
+/* 
+File : login.css
+Author : Amelia Goldsby
+Date Created : 22/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA 
+
+Description : This file contains the shared styles for the login and signup pages.
+*/
+
+/* General Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #002663;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container Styles */
+.container {
+  background-color: #fff;
+  color: #002663;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+/* Heading Styles */
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="password"] {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button Styles */
+.button {
+  margin-top: 10px;
+  background-color: #ffcc00;
+  color: #002663;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #e6b800;
+}
+
+/* Link Styles */
+a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+/* Radio Container Styles */
+.radio-container {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.radio-container input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Flash Message Styles */
+.flash-messages {
+  margin-bottom: 20px;
+}
+
+.flash {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.flash.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.flash.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.flash.danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}

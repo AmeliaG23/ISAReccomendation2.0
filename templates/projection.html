@@ -1,0 +1,61 @@
+<!-- 
+File : projection.html
+Author : Amelia Goldsby
+Date Created : 27/08/2024
+Project : ISA Recommendation Website
+Course : Software Engineering and Agile
+         Level 5, QA & 
+         Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the content for the page which shows the user their 
+              two projection prediction- a regular one against the avergae AER rate, and 
+              another against their recommended risk AER rate. 
+(Germain, 2023)
+-->
+
+<!-- Jinja -->
+<!-- Extends loginBase.html where main body and layout is set, styling is inherited from login.css -->
+{% extends "base.html" %}
+<!-- Page title -->
+{% block title %}Projection{% endblock %}
+
+{% block content %}
+
+<script>
+    // Javascript function for close button- redirects to home.html
+    function closeButton() {
+        window.location.href = "{{ url_for('home') }}"
+    }
+</script>
+
+<div class="content">
+    <!-- Main content for projection page -->
+    <h1>Projection</h1>
+    <div class="projection-content">
+        <p>You have now completed your Fact Find Evaluation and Attitude to Risk Evaluation.</p>
+        <p>Below is your projection based on the answers you have provided:</p>
+        <br>
+        <!-- Strong tags make the text bold -->
+        <p>Amount Invested: <strong>£{{ deposit }}</strong></p>
+        <p>Monthly Payment: <strong>£{{ monthlyPayment }}</strong></p>
+        <p>Investment Duration: <strong>{{ years }}</strong> years</p>
+        <p>Projected ISA amount over <strong>{{ years }} years</strong> at the current AER (4.84%):<strong>
+                {% if projectionAmount %}
+                £{{ projectionAmount }}
+                {% else %}
+                <!-- If no projection amount is there, display error message -->
+                Not available
+                {% endif %}
+            </strong>
+            <!-- (Cushon, 2024) -->
+        </p>
+        <br>
+        <h3>Risk Projection</h3>
+        <p>From the Attitude to Risk Evaluation you have been recognized as having a <strong>{{ riskRating }}
+                risk</strong></p>
+        <p>Projected ISA for risk level: <strong>£{{ projectionRiskAmount }}</strong></p>
+        <button type="button" class="button" onclick="closeButton()">Close</button>
+    </div>
+</div>
+{% endblock %}
