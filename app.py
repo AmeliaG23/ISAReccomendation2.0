@@ -643,6 +643,7 @@ def recommendations():
 # Entry point for the application
 if __name__ == '__main__':
     initializeData()
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
 #(Jakerieger, 2022)
