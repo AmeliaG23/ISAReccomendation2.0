@@ -1,18 +1,3 @@
-"""
-File : deploy.yaml
-Author : Amelia Goldsby
-Date Created : 04/06/2025
-Project : ISA Recommendation Website
-Course : Software Engineering and DevOps, 
-         Level 6, QA 
-
-Description : This file contains the deployment details, which runs a pipeline in GitHub 
-              which automatically runs tests and updates and downloads all requirements. The 
-              pipeline then publishes this Flask website to Render.com using a Rest API
-
-Live URL :    https://isarecomendation2-0.onrender.com
-"""
-
 name: Flask CI/CD to Render
 
 on:
@@ -24,7 +9,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-  # Step 1: Checkout the repository
+    # Step 1: Checkout the repository
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
