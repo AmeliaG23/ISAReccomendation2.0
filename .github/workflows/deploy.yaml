@@ -1,35 +1,57 @@
+"""
+File : deploy.yaml
+Author : Amelia Goldsby
+Date Created : 04/06/2025
+Project : ISA Recommendation Website
+Course : Software Engineering and DevOps, 
+         Level 6, QA 
+
+Description : This file contains the deployment details, which runs a pipeline in GitHub 
+              which automatically runs tests and updates and downloads all requirements. The 
+              pipeline then publishes this Flask website to Render.com using a Rest API
+
+Live URL :    https://isarecomendation2-0.onrender.com
+"""
+
 name: Flask CI/CD to Render
 
 on:
   push:
     branches:
-      - main # or your deploy branch
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+  # Step 1: Checkout the repository
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10" # Match your app’s Python version
+          python-version: "3.10"
 
+      # Step 3: Install dependencies from requirements.txt
       - name: Install dependencies
         run: |
+          echo "Installing dependencies 🧪"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Step 4: Run tests using pytest
       - name: Run tests
         run: |
           echo "Tests are running 🧪"
           python3 -m pytest
 
+      # Step 5: Trigger deployment on Render.com using REST API
       - name: Trigger Render Deploy
         run: |
+          echo "Deploying 🧪"
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.RENDER_DEPLOY_HOOK }}" \
             -H "Content-Type: application/json" \

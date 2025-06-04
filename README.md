@@ -7,18 +7,18 @@ This website creates a Projection prediction for ISAs (Individual Savings Accoun
 1. [Project Description](#project-description)
 2. [Key Features](#key-features)
 3. [Technologies Used](#technologies-used)
-4. [Prerequisites](#prerequisites)
-5. [Installation Steps](#installation-steps)
-6. [Authors](#authors)
-7. [Version History](#version-history)
-8. [License](#license)
+4. [CI/CD Pipeline](#cicd-pipeline)
+5. [Prerequisites](#prerequisites)
+6. [Installation Steps](#installation-steps)
+7. [Authors](#authors)
+8. [Version History](#version-history)
 9. [Acknowledgments](#acknowledgments)
 
 ## Project Description
 
-**The ISA Recommendation Website** is an application which has been created for Aviva. The main function is to allow users to recEIve a projection prediction, rather than calling customer advisors at Aviva. This has shown to be a major contributing factor into creating a high average call time for users through research. Removing the need for customer advisors completing this journey for users, allows reduced average call times for customers, but also less calls relating to ISA recommendations.
+**The ISA Recommendation Website** is an application which has been created for Aviva. The main function is to allow users to receive a projection prediction, rather than calling customer advisors at Aviva. This has shown to be a major contributing factor into creating a high average call time for users through research. Removing the need for customer advisors completing this journey for users, allows reduced average call times for customers, but also less calls relating to ISA recommendations.
 
-Users are able to log in to the application and complete the Fact Find form, to analyse affoRdability and their attitude to risk. Two projections are produced to the user, once the form is complete:
+Users are able to log in to the application and complete the Fact Find form, to analyse affordability and their attitude to risk. Two projections are produced to the user, once the form is complete:
 
 - **Normal Projection:** Projection against average savings rate (29/08/2024) against total over years.
 - **Risk Projection:** Projection against rate analysed from risk attitude (29/08/2024)
@@ -27,7 +27,8 @@ Past projections are visible to users, if the fact find evaluation has been comp
 
 Admin users have the ability to perform all **CRUD** operations (CREATE, READ, UPDATE, DELETE), as they have access to the database holding user details (User table). They can read all users, add users, update user details, and delete users.
 
-The website has been published through [Vercel](https://vercel.com/home) and can be accessed [here](https://isa-recommendation-website.vercel.app/)
+The website has been deployed using [Render.com](https://render.com) and can be accessed here:  
+👉 [ISA Recommendation Website on Render](https://isarecomendation2-0.onrender.com)
 
 ## Key Features
 
@@ -47,11 +48,22 @@ The website has been published through [Vercel](https://vercel.com/home) and can
 - **Bootstrap**: CSS framework for responsive and modern design.
 - **Jinja2**: Templating engine for rendering HTML templates.
 
+## CI/CD Pipeline
+
+This project uses **GitHub Actions** for Continuous Integration and Deployment (CI/CD). On every push to the `main` branch:
+
+1. All dependencies are installed.
+2. Automated tests are run using `pytest`.
+3. If tests pass, the app is deployed to [Render](https://render.com) using their REST API.
+
+Secrets like `RENDER_DEPLOY_HOOK` are securely stored in GitHub repository settings.
+
 ### Prerequisites
 
-- Python 3.x
+- Python 3.10
 - Flask
 - SQLAlchemy
+- Pytest
 - Dependencies listed in `requirements.txt`
 
 ### Installation Steps
@@ -93,7 +105,7 @@ The website has been published through [Vercel](https://vercel.com/home) and can
    pip audit
    ```
 
-   **IMPORTANT- Please update any vulnerabitilies to protect the application against Dependency Vulnerabilities**
+   **IMPORTANT- Please update any vulnerabilities to protect the application against Dependency Vulnerabilities**
 
 6. **Setup Database**
 
@@ -132,10 +144,6 @@ Amelia Goldsby
 - 0.1
 
   - Initial Release
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Acknowledgments
 
