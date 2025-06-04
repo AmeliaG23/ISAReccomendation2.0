@@ -3,9 +3,7 @@ File : app.py
 Author : Amelia Goldsby
 Date Created : 21/08/2024
 Project : ISA Recommendation Website
-Course : Software Engineering and Agile
-         Level 5, QA & 
-         Software Engineering and DevOps, 
+Course : Software Engineering and DevOps, 
          Level 6, QA 
 
 Description : This file is the main basis for the whole ISA Recommendation Website, 
