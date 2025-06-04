@@ -28,6 +28,10 @@ jobs:
           echo "🧪 Add your tests here"
           # pytest or unittest, if you have tests
 
-      - name: Deploy to Render
+      - name: Trigger Render Deploy
         run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.RENDER_DEPLOY_HOOK }}" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            https://api.render.com/v1/services/srv-d1006p0gjchc73a7ek0g/deploys
