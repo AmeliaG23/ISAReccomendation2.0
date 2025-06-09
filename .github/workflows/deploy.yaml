@@ -9,8 +9,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    # Step 1: Checkout the repository
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -20,23 +20,28 @@ jobs:
         with:
           python-version: "3.10"
 
-      # Step 3: Install dependencies from requirements.txt
-      - name: Install dependencies
+      # Step 3: Install + Upgrade dependencies
+      - name: Install and Upgrade dependencies
         run: |
-          echo "Installing dependencies 🧪"
+          echo "🔄 Upgrading pip and dependencies"
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+
+          echo "📦 Installing from requirements.txt"
+          pip install --upgrade -r requirements.txt
+
+          echo "📋 Listing installed packages"
+          pip list
 
       # Step 4: Run tests using pytest
       - name: Run tests
         run: |
-          echo "Tests are running 🧪"
+          echo "🧪 Running tests with pytest"
           python3 -m pytest
 
       # Step 5: Trigger deployment on Render.com using REST API
       - name: Trigger Render Deploy
         run: |
-          echo "Deploying 🧪"
+          echo "🚀 Deploying to Render"
           curl -X POST \
             -H "Authorization: Bearer ${{ secrets.RENDER_DEPLOY_HOOK }}" \
             -H "Content-Type: application/json" \
