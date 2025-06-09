@@ -20,8 +20,8 @@ This website creates a Projection prediction for ISAs (Individual Savings Accoun
 
 Users are able to log in to the application and complete the Fact Find form, to analyse affordability and their attitude to risk. Two projections are produced to the user, once the form is complete:
 
-- **Normal Projection:** Projection against average savings rate (29/08/2024) against total over years.
-- **Risk Projection:** Projection against rate analysed from risk attitude (29/08/2024)
+- **Normal Projection:** Projection against average savings rate (29/05/2025) against total over years.
+- **Risk Projection:** Projection against rate analysed from risk attitude (29/05/2025)
 
 Past projections are visible to users, if the fact find evaluation has been completed, from the home page. Users have the ability to change their username and password.
 
